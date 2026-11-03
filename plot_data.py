@@ -94,7 +94,7 @@ ax.boxplot(
 rng = np.random.default_rng(12345)
 
 for x, values in enumerate(data, start=1):
-    jitter = 0
+    jitter = (0 if len(values) < 10 else 0.02)
     jitter = rng.uniform(-jitter, jitter, size=len(values))
 
     ax.scatter(
