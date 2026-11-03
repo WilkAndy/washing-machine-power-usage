@@ -15,9 +15,14 @@ Cotton speed,40,0.64
 Cotton speed,40,0.52
 Cotton speed,40,0.44
 Cotton speed,40,0.63
+Cotton speed,40,0.50
+Cotton speed,40,0.59
+Cotton speed,40,0.50
 
 Cotton eco,40,0.63
 Cotton eco,40,0.63
+Cotton eco,40,0.37
+Cotton eco,40,0.25
 
 Cotton eco,30,0.20
 
@@ -35,6 +40,12 @@ Mix eco,40,0.34
 Mix eco,40,0.38
 Mix eco,40,0.36
 Mix eco,40,0.35
+Mix eco,40,0.35
+Mix eco,40,0.34
+Mix eco,40,0.33
+Mix eco,40,0.28
+Mix eco,40,0.36
+Mix eco,40,0.33
 
 Mix eco,30,0.17
 
@@ -54,6 +65,11 @@ Mix speed,40,0.34
 Mix speed,40,0.47
 Mix speed,40,0.44
 Mix speed,40,0.40
+Mix speed,40,0.47
+Mix speed,40,0.35
+Mix speed,40,0.77
+Mix speed,40,0.46
+Mix speed,40,0.44
 
 Mix speed,30,0.16
 Mix speed,30,0.22
@@ -66,6 +82,8 @@ Super quick 30,,0.03
 Super quick 30,,0.04
 Super quick 30,,0.04
 Super quick 30,,0.04
+Super quick 30,,0.03
+Super quick 15,,0.03
 Super quick 15,,0.03
 Super quick 15,,0.03
 

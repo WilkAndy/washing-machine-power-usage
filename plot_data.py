@@ -128,3 +128,51 @@ plt.title("Bosch washing machine power usage")
 plt.tight_layout()
 plt.savefig("plot_data.png", bbox_inches="tight")
 plt.show()
+
+
+
+# ------------------------------------------------------------
+# Statistical comparison: Mix speed vs Mix eco at 40 degC
+# ------------------------------------------------------------
+from scipy import stats
+
+eco = df.loc[
+    df["Cycle"].eq("Mix eco") & df["Temperature degC"].eq(40),
+    "Power usage kWh"
+].dropna()
+
+speed = df.loc[
+    df["Cycle"].eq("Mix speed") & df["Temperature degC"].eq(40),
+    "Power usage kWh"
+].dropna()
+
+mean_eco = eco.mean()
+mean_speed = speed.mean()
+sd_eco = eco.std(ddof=1)
+sd_speed = speed.std(ddof=1)
+
+# Welch's t-test
+test = stats.ttest_ind(speed, eco, equal_var=False)
+
+# Difference and 95% CI: speed - eco
+diff = mean_speed - mean_eco
+se = np.sqrt(sd_speed**2 / len(speed) + sd_eco**2 / len(eco))
+
+df_welch = (
+    (sd_speed**2 / len(speed) + sd_eco**2 / len(eco))**2
+    / (
+        (sd_speed**2 / len(speed))**2 / (len(speed) - 1)
+        + (sd_eco**2 / len(eco))**2 / (len(eco) - 1)
+    )
+)
+
+tcrit = stats.t.ppf(0.975, df_welch)
+ci_low = diff - tcrit * se
+ci_high = diff + tcrit * se
+
+print("\nMix speed vs Mix eco at 40degC")
+print(f"Mix speed: mean = {mean_speed:.3f} kWh, SD = {sd_speed:.3f}, n = {len(speed)}")
+print(f"Mix eco:   mean = {mean_eco:.3f} kWh, SD = {sd_eco:.3f}, n = {len(eco)}")
+print(f"Difference in means (speed - eco) = {diff:.3f} kWh")
+print(f"95% CI for difference = [{ci_low:.3f}, {ci_high:.3f}] kWh")
+print(f"Welch t-test: t = {test.statistic:.3f}, df = {df_welch:.1f}, p = {test.pvalue:.4g}")
