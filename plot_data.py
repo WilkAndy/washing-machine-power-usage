@@ -31,7 +31,7 @@ for cycle, temperature, label in categories:
         mask &= df["Temperature degC"].eq(temperature)
 
     # Ignore missing measurements
-    values = df.loc[mask, "Power usage kWh"].dropna().to_numpy()
+    values = df.loc[mask, "Energy usage kWh"].dropna().to_numpy()
 
     data.append(values)
     labels.append(f"{label}.  n={len(values)}")
@@ -119,12 +119,12 @@ ax.set_xticklabels(
     ha="right"
 )
 
-ax.set_ylabel("Power (kWh)")
+ax.set_ylabel("Energy used (kWh)")
 ax.set_ylim([0, ax.get_ylim()[1]])
 
 ax.grid(axis="y", alpha=0.25)
 
-plt.title("Bosch washing machine power usage")
+plt.title("Bosch washing machine energy usage")
 plt.tight_layout()
 plt.savefig("plot_data.png", bbox_inches="tight")
 plt.show()
@@ -138,12 +138,12 @@ from scipy import stats
 
 eco = df.loc[
     df["Cycle"].eq("Mix eco") & df["Temperature degC"].eq(40),
-    "Power usage kWh"
+    "Energy usage kWh"
 ].dropna()
 
 speed = df.loc[
     df["Cycle"].eq("Mix speed") & df["Temperature degC"].eq(40),
-    "Power usage kWh"
+    "Energy usage kWh"
 ].dropna()
 
 mean_eco = eco.mean()
